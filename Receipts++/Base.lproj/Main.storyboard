@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,11 +21,75 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="53g-lf-wmw">
+                                <rect key="frame" x="0.0" y="50" width="375" height="567"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="567" id="VNc-Dk-Jra"/>
+                                </constraints>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oyx-ae-6P6">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recepits++" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fwo-xm-cEy">
+                                        <rect key="frame" x="143" y="15" width="88" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="fwo-xm-cEy" firstAttribute="centerX" secondItem="oyx-ae-6P6" secondAttribute="centerX" id="AO0-mQ-WHT"/>
+                                    <constraint firstItem="fwo-xm-cEy" firstAttribute="centerY" secondItem="oyx-ae-6P6" secondAttribute="centerY" id="Jjb-0S-9a1"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kn2-Tm-0zl">
+                                <rect key="frame" x="264" y="625" width="99" height="24"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="contentEdgeInsets" minX="5" minY="3" maxX="3" maxY="3"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="1"/>
+                                <state key="normal" title="Add Receipts">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="53g-lf-wmw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="D5p-vQ-TsJ"/>
+                            <constraint firstItem="53g-lf-wmw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="L1k-29-K8G"/>
+                            <constraint firstItem="53g-lf-wmw" firstAttribute="top" secondItem="oyx-ae-6P6" secondAttribute="bottom" id="N6e-Cv-y5W"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Kn2-Tm-0zl" secondAttribute="trailing" constant="-4" id="Ne3-ga-N46"/>
+                            <constraint firstItem="oyx-ae-6P6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Sj8-kI-wwa"/>
+                            <constraint firstAttribute="trailing" secondItem="oyx-ae-6P6" secondAttribute="trailing" id="UHe-m8-A92"/>
+                            <constraint firstItem="53g-lf-wmw" firstAttribute="leading" secondItem="oyx-ae-6P6" secondAttribute="leading" id="cb0-tQ-PSB"/>
+                            <constraint firstItem="Kn2-Tm-0zl" firstAttribute="top" secondItem="53g-lf-wmw" secondAttribute="bottom" constant="8" symbolic="YES" id="nd1-M8-Z0t"/>
+                            <constraint firstItem="oyx-ae-6P6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="tv2-Nc-YvD"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="40.799999999999997" y="43.628185907046479"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="dqA-Gw-iRO">
+            <objects>
+                <viewController id="MtO-J6-Oii" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Quv-4u-QXm"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fxf-ou-zCA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OuI-wK-I5B">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5FJ-L0-V7s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="999" y="44"/>
         </scene>
     </scenes>
 </document>
