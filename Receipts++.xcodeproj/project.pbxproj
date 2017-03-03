@@ -15,6 +15,7 @@
 		E134E4CA1E68B06D00898796 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E134E4C81E68B06D00898796 /* LaunchScreen.storyboard */; };
 		E134E4D31E68B13500898796 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E134E4D21E68B13500898796 /* MasterViewController.m */; };
 		E134E54E1E68BE7400898796 /* AddReceiptViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E134E54D1E68BE7400898796 /* AddReceiptViewController.m */; };
+		E134E5511E68E0B500898796 /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E134E5501E68E0B500898796 /* CoreDataManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		E134E4D21E68B13500898796 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		E134E54C1E68BE7400898796 /* AddReceiptViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddReceiptViewController.h; sourceTree = "<group>"; };
 		E134E54D1E68BE7400898796 /* AddReceiptViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddReceiptViewController.m; sourceTree = "<group>"; };
+		E134E54F1E68E0B500898796 /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		E134E5501E68E0B500898796 /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,13 +66,11 @@
 		E134E4B61E68B06D00898796 /* Receipts++ */ = {
 			isa = PBXGroup;
 			children = (
-				E134E4D11E68B13500898796 /* MasterViewController.h */,
-				E134E4D21E68B13500898796 /* MasterViewController.m */,
+				E134E5521E68E3F100898796 /* Controllers */,
+				E134E5541E68E41D00898796 /* Models */,
 				E134E4BA1E68B06D00898796 /* AppDelegate.h */,
 				E134E4BB1E68B06D00898796 /* AppDelegate.m */,
 				E134E4C01E68B06D00898796 /* Main.storyboard */,
-				E134E54C1E68BE7400898796 /* AddReceiptViewController.h */,
-				E134E54D1E68BE7400898796 /* AddReceiptViewController.m */,
 				E134E4C61E68B06D00898796 /* Assets.xcassets */,
 				E134E4C81E68B06D00898796 /* LaunchScreen.storyboard */,
 				E134E4CB1E68B06D00898796 /* Info.plist */,
@@ -85,6 +86,26 @@
 				E134E4B81E68B06D00898796 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E134E5521E68E3F100898796 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E134E4D11E68B13500898796 /* MasterViewController.h */,
+				E134E4D21E68B13500898796 /* MasterViewController.m */,
+				E134E54C1E68BE7400898796 /* AddReceiptViewController.h */,
+				E134E54D1E68BE7400898796 /* AddReceiptViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		E134E5541E68E41D00898796 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E134E54F1E68E0B500898796 /* CoreDataManager.h */,
+				E134E5501E68E0B500898796 /* CoreDataManager.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,6 +179,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E134E5511E68E0B500898796 /* CoreDataManager.m in Sources */,
 				E134E4D31E68B13500898796 /* MasterViewController.m in Sources */,
 				E134E54E1E68BE7400898796 /* AddReceiptViewController.m in Sources */,
 				E134E4C51E68B06D00898796 /* Receipts__.xcdatamodeld in Sources */,

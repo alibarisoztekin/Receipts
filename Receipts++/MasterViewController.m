@@ -7,8 +7,14 @@
 //
 
 #import "MasterViewController.h"
+#import "AddReceiptViewController.h"
+#import "CoreDataManager.h"
 
-@interface MasterViewController ()
+
+@interface MasterViewController () <UITableViewDataSource,UITabBarDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic) CoreDataManager* dataManager;
 
 @end
 
@@ -18,6 +24,30 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
+
+- (IBAction)tappedAddReceipt:(UIButton *)sender {
+    
+    [self performSegueWithIdentifier:@"addReceipt" sender:self];
+    
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    AddReceiptViewController* addRVC = segue.destinationViewController;
+    
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 5;
+    
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return nil;
+}
+
 
 
 @end

@@ -1,5 +1,5 @@
 //
-//  MasterViewController.h
+//  AddReceiptViewController.h
 //  Receipts++
 //
 //  Created by Ali Barış Öztekin on 2017-03-02.
@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Receipts__+CoreDataModel.h"
 
-@interface MasterViewController : UIViewController
+@interface AddReceiptViewController : UIViewController
+
+@property (nonatomic) Receipt* receipt;
 
 @end
