@@ -20,6 +20,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.coreDataManager = [CoreDataManager deafultManager];
+    [self.coreDataManager setupTagsArray];
     return YES;
 }
 

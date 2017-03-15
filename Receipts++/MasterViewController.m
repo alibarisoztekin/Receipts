@@ -15,6 +15,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) CoreDataManager* dataManager;
+@property (nonatomic) NSArray<Tag*>* tagsArray;
+@property (nonatomic) NSDictionary<NSString*,NSArray<Receipt*>*>* dataSource;
 
 @end
 
@@ -22,7 +24,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.dataManager = [CoreDataManager deafultManager];
+    [self.dataManager updateDatabaseWithCompletionHandler:^(NSArray<Tag *> *tagArray, NSDictionary<NSString *,NSArray<Receipt *> *> *dataSource) {
+        self.tagsArray = tagArray;
+        self.dataSource = dataSource;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self.tableView reloadData];
+        }];
+    }];
+    
+  
 }
 
 - (IBAction)tappedAddReceipt:(UIButton *)sender {
@@ -33,21 +44,38 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     AddReceiptViewController* addRVC = segue.destinationViewController;
+    addRVC.tagsArray = [[CoreDataManager deafultManager] returnTagsArray];
     
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return self.tagsArray.count ;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    NSString* key = self.tagsArray[section].tagName;
+    return   [self.dataSource objectForKey:key].count;
     
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return nil;
+    UITableViewCell* cell= [tableView dequeueReusableCellWithIdentifier:@"receiptCell" forIndexPath:indexPath];
+    NSString* key = self.tagsArray[indexPath.section].tagName;
+   
+    cell.textLabel.text = [self.dataSource objectForKey:key][indexPath.row].receiptDescription;
+    return cell;
 }
 
-
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    return self.tagsArray[section].tagName;
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.dataManager updateDatabaseWithCompletionHandler:^(NSArray<Tag *> *tagArray, NSDictionary<NSString *,NSArray<Receipt *> *> *dataSource) {
+        self.tagsArray = tagArray;
+        self.dataSource = dataSource;
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [self.tableView reloadData];
+        }];
+    }];}
 
 @end

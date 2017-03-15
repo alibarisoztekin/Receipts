@@ -12,5 +12,6 @@
 @interface AddReceiptViewController : UIViewController
 
 @property (nonatomic) Receipt* receipt;
+@property (weak,nonatomic)  NSArray<Tag*>* tagsArray;
 
 @end

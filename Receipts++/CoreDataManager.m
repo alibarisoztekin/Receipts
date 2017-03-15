@@ -29,6 +29,8 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedManager = [[self alloc] init];
+        NSManagedObjectContext *context = sharedManager.persistentContainer.viewContext;
+        sharedManager.context = context;
     });
     return sharedManager;
 }
@@ -69,11 +71,14 @@
 -(void)setupTagsArray{
     
     NSArray<Tag*>* tagArray;
-    NSFetchRequest* tagFetchRequest = [NSFetchRequest fetchRequestWithEntityName:kTagEntityName];
+    NSFetchRequest* tagFetchRequest = [[NSFetchRequest alloc] init];
     tagFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"tagName" ascending:YES]];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:kTagEntityName inManagedObjectContext:self.context];
+    [tagFetchRequest setEntity:entity];
+    
     
     NSError *fetchError;
-    tagArray = [tagFetchRequest execute:&fetchError];
+    tagArray = [NSArray arrayWithArray:[self.context executeFetchRequest:tagFetchRequest error:&fetchError]];
     
     if(!tagArray || tagArray.count==0 ){
         
@@ -83,15 +88,18 @@
         personal.tagName = @"Personal";
         family.tagName = @"Family";
         business.tagName = @"Business";
-        tagArray = [tagFetchRequest execute:&fetchError];
-        self.tagsArray = tagArray;
+        [self saveContext];
+        
+        tagArray = [NSArray arrayWithArray:[self.context executeFetchRequest:tagFetchRequest error:&fetchError]];
+        
     }
-    self.tagsArray = tagArray;
+        self.tagsArray = [NSArray arrayWithArray:tagArray];
+        
 }
 
--(NSArray<Tag*>*) tagsArray{
+-(NSArray<Tag*>*) returnTagsArray{
     
-    if(!self.tagsArray)
+    if(!self.tagsArray )
         [self setupTagsArray];
     return self.tagsArray;
 }
@@ -101,7 +109,7 @@
     NSFetchRequest* receiptFetchRequest = [NSFetchRequest fetchRequestWithEntityName:kReceiptEntityName];
     receiptFetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"timeStamp" ascending:YES]];
     NSError* fetchError;
-    receiptsArray =  [receiptFetchRequest execute:&fetchError];
+    receiptsArray =  [self.context executeFetchRequest:receiptFetchRequest error:&fetchError];
     if(!receiptsArray || receiptsArray.count ==0)
         NSLog(@"Fetch error");
     return receiptsArray;
@@ -112,18 +120,22 @@
     NSMutableDictionary* tempDictionary =[NSMutableDictionary new];
     
     
-    NSArray<Receipt*>* receiptArray = [self receiptsArrayFromFetch];
+    
     for(Tag* tag in self.tagsArray){
-        NSMutableArray* rowArray = [NSMutableArray new];
+        NSMutableArray* receiptArray = [[tag.receipts allObjects] mutableCopy];
+        NSSortDescriptor* sortByDate =  [NSSortDescriptor sortDescriptorWithKey:@"timeStamp" ascending:YES];
+        [receiptArray sortedArrayUsingDescriptors:@[sortByDate]];
         
-        for (Receipt* receipt in receiptArray) {
-            [receipt.tags containsObject:tag];
-            [rowArray addObject:receipt];
-        }
-        [tempDictionary setObject:rowArray forKey:tag.tagName];
+        [tempDictionary setObject:receiptArray forKey:tag.tagName];
     };
     return tempDictionary;
 }
 
+-(void)updateDatabaseWithCompletionHandler:(void (^)(NSArray<Tag*>* tagArray, NSDictionary<NSString*,NSArray<Receipt*>*>* dataSource)) completionHandler{
+    NSArray* array= [self returnTagsArray];
+    NSDictionary* dictionary = [self dataSource];
+    
+    completionHandler(array,dictionary);
+}
 
 @end
