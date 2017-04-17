@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class Receipt;
+
 @interface ReceiptTableViewCell : UITableViewCell
+
+- (void)configureCellWithReceipt:(Receipt*) receipt;
 
 @end

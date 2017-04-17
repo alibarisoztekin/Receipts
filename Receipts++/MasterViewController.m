@@ -9,7 +9,7 @@
 #import "MasterViewController.h"
 #import "AddReceiptViewController.h"
 #import "CoreDataManager.h"
-
+#import "ReceiptTableViewCell.h"
 
 @interface MasterViewController () <UITableViewDataSource,UITabBarDelegate>
 
@@ -58,10 +58,9 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell* cell= [tableView dequeueReusableCellWithIdentifier:@"receiptCell" forIndexPath:indexPath];
+    ReceiptTableViewCell* cell= [tableView dequeueReusableCellWithIdentifier:@"receiptCell" forIndexPath:indexPath];
     NSString* key = self.tagsArray[indexPath.section].tagName;
-   
-    cell.textLabel.text = [self.dataSource objectForKey:key][indexPath.row].receiptDescription;
+    [cell configureCellWithReceipt:[self.dataSource objectForKey:key][indexPath.row]];
     return cell;
 }
 
